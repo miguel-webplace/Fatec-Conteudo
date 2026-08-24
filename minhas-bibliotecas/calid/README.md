@@ -8,7 +8,7 @@ Desenvolver uma biblioteca em C capaz de receber um dado e validá-lo. A bibliot
 ## Tipos de filtros
 
 - igual a
-- maior que | menor que
+- maior que | menor que | 
 - lista pré-selecionada (exclusão ou inclusão)
 
 
