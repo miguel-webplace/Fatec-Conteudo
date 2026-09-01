@@ -16,3 +16,8 @@
 - Adicionado comentários para relembrar
 
 - Criado arquivo sandbox para testar ideia de lidar com tipos dentro dos filtros
+
+
+# 01/09/2026
+
+- Criação de teste para pointeiro que segura as funções de validação. PROBLEMA: Algum desentendimento com ponteiros para ponteiros, rever a ordem de dereferenciação
