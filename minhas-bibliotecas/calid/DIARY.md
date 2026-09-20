@@ -21,3 +21,9 @@
 # 01/09/2026
 
 - Criação de teste para pointeiro que segura as funções de validação. PROBLEMA: Algum desentendimento com ponteiros para ponteiros, rever a ordem de dereferenciação
+
+# 20/09/2026
+
+- Problema de ponteiro duplo resolvido
+- Problema de erro de segmentação resolvido
+- Isolamento `check_alloc_pointer` testado
