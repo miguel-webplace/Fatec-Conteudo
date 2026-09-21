@@ -36,7 +36,7 @@ int add_check(Checklist **check_ptr, int value) {
     
     // save copy of the pointer for safety
     Checklist *ptr_cpy = *check_ptr;
-    *check_ptr = realloc(*check_ptr, sizeof(Checklist) * (new_size + 1));
+    *check_ptr = realloc(*check_ptr, sizeof(Checklist) * (new_size));
 
     // pointer check
     if ( *check_ptr == NULL) {
