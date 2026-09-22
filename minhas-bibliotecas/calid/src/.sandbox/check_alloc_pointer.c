@@ -1,78 +1,69 @@
 #include <stdio.h>
+#include <stdarg.h>
 #include <stdlib.h>
 
 #include "../typing.h"
-
+#define DEBUG
 
 
 /*
    This sandbox simulates the use and flow of the checklist struct
-
-   - a checklist dynamic space is allocated and returned using 'create_checklist'
-
-   - to add items, the 'add_check' reads the size of the space using the value attribute
-   on the first "dummy" element, realloc based on this, replaces old pointer and updates the
-   new size
  */
 
-Checklist* create_checklist() {
-    // Create dynamic memory pointer to hold the validations
-    Checklist *checklist_ptr = malloc(sizeof(Checklist) * 2);
-    
-    /*
-    use index 0 to hold the size of the stack with
-    the value property
-    */
-    Checklist size = {.value = 0};
-    checklist_ptr[0] = size;
-    return checklist_ptr;
-}
 
-int add_check(Checklist **check_ptr, int value) {
+CheckList create_checklist(int size, ...) {
+    // hanlding code for variadic args
+    va_list args;
+    va_start(args, size);
     
-    // pointer confusion resolved: using parenthesis for operation precedence work as intended
-    int actual_size = ( *check_ptr )->value;
-    int new_size = actual_size + 1;
+    CheckList check = {.size = size};
     
-    // save copy of the pointer for safety
-    Checklist *ptr_cpy = *check_ptr;
-    *check_ptr = realloc(*check_ptr, sizeof(Checklist) * (new_size));
-
-    // pointer check
-    if ( *check_ptr == NULL) {
-        printf("Allocation memory error\n");
-        *check_ptr = ptr_cpy;
-        return 1;
+    // gets allocation size and verifies allocation
+    int items_bytespace = sizeof(CheckItem) * size;
+    CheckItem *item_ptr = malloc(items_bytespace);
+    if (item_ptr == NULL) {
+        
+        printf("Memory allocation error.\n");
+        check.size = -1;
+        return check;
     }
-    // safety measure
-    free(ptr_cpy);
-    ptr_cpy = NULL;
+    check.list = item_ptr;
+    free(item_ptr); item_ptr = NULL;
     
-    // add new item
-    Checklist new_item = {
-        .value = value
-    };
-    ( *check_ptr )[new_size] = new_item;
+    #ifdef DEBUG
+    printf(" --- DEBUG --- : pointer allocation clear\n");
+    #endif
     
-    // update size of checklist
-    ( *check_ptr )[0].value = new_size;
+    // Add all the items
+    for (int i = 0; i < size; ++i) {
+        
+        CheckItem next_item = va_arg(args, CheckItem);
+        #ifdef DEBUG
+        printf(" --- DEBUG --- : next item ref value: %d\n", *(int*) next_item.ref);
+        #endif
+        check.list[i] = next_item;
+    }
+    va_end(args);
+    #ifdef DEBUG
+    printf(" --- DEBUG --- : adding items clear\n");
+    #endif
     
-    return 0;
+    return check;
 }
 
-
+#ifdef DEBUG_WITH_MAIN
 int main() {
     
-    Checklist *checklist = create_checklist();
+    CheckList age_filters = {.size = 2};
     
-    add_check(&checklist, 3);
-    add_check(&checklist, 4);
-    add_check(&checklist, 23);
-    add_check(&checklist, 201);
+    int value_1 = 36, value_2 = 600;
+    CheckItem more_than = {.value = &value_1}, less_than = {.value = &value_2};
+    create_checklist(&age_filters, more_than, less_than);
     
-    printf("item: %d\n", (checklist[1].value));
-    printf("item: %d\n", (checklist[2].value));
-    printf("item: %i\n", (checklist[3].value));
-    printf("item: %i\n", (checklist[4].value));
+    int print_value_1 = *(int*) age_filters.list[0].value;
+    printf("VALUE 1: %d\n", print_value_1);
+    
+    printf("VALUE 2: %d\n", *(int*) age_filters.list[1].value);
     return 0;
 }
+#endif
