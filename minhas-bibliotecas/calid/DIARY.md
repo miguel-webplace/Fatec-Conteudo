@@ -77,3 +77,7 @@ repetido.
 Ao analisar com Claude -- antes de notar o problema -- encontrei erros ao liberar memória
 do ponteiro acidentalmente e o uso do `va_start` cedo de forma desnecesaŕia, o necessitava
 usar `va_end` no fluxo opcional da função.
+
+*Próximos desafios:*
+- Testar lógica semelhante do `CheckList` em `Form`
+- Desenvolver lógica para salvar o input validado em variável não-genérica
