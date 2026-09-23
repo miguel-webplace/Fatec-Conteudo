@@ -3,55 +3,56 @@
 #include <stdlib.h>
 
 #include "../typing.h"
-#define DEBUG
 
+#define DEBUG
+// #define DEBUG_MAIN
 
 /*
    This sandbox simulates the use and flow of the checklist struct
  */
 
 
-CheckList create_checklist(int size, ...) {
+int create_checklist(CheckList *checkptr, ...) {
     // hanlding code for variadic args
-    va_list args;
-    va_start(args, size);
     
-    CheckList check = {.size = size};
-    
-    // gets allocation size and verifies allocation
-    int items_bytespace = sizeof(CheckItem) * size;
-    CheckItem *item_ptr = malloc(items_bytespace);
-    if (item_ptr == NULL) {
+    int items_bytespace = sizeof(CheckItem) * checkptr->size;
+    CheckItem *items = malloc(items_bytespace);
+    if (items == NULL) {
         
         printf("Memory allocation error.\n");
-        check.size = -1;
-        return check;
+        return 1;
     }
-    check.list = item_ptr;
-    free(item_ptr); item_ptr = NULL;
-    
+    checkptr->list = items;
     #ifdef DEBUG
     printf(" --- DEBUG --- : pointer allocation clear\n");
     #endif
     
-    // Add all the items
-    for (int i = 0; i < size; ++i) {
+    // add all the items
+    va_list args;
+    va_start(args, checkptr);
+    for (int i = 0; i < checkptr->size; ++i) {
         
         CheckItem next_item = va_arg(args, CheckItem);
         #ifdef DEBUG
         printf(" --- DEBUG --- : next item ref value: %d\n", *(int*) next_item.ref);
         #endif
-        check.list[i] = next_item;
+        checkptr->list[i] = next_item;
     }
     va_end(args);
+    
+    /*  ---- Testing ----
+    check.list[0] = va_arg(args, CheckItem);
+    check.list[1] = va_arg(args, CheckItem);
+    -------- Testing ---- */
+    
     #ifdef DEBUG
     printf(" --- DEBUG --- : adding items clear\n");
     #endif
     
-    return check;
+    return 0;
 }
 
-#ifdef DEBUG_WITH_MAIN
+#ifdef DEBUG_MAIN
 int main() {
     
     CheckList age_filters = {.size = 2};
