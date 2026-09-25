@@ -1,27 +1,33 @@
-#include <stdlib.h>
 #include "typing.h"
+#include "check_functions.c"
 
 
-
-int greater_than(int value, int ref);
-
-int lower_than(int value, int ref);
-
-int equal(int value, int ref);
-
-
-
-int greater_than(int value, int ref) {
-
-    return value > ref;
+CheckItem less_than(void* ref) {
+    CheckItem ls = {
+        .verify = &_lt,
+        .ref = ref
+    };
+    return ls;
 }
 
 int greater_than(int value, int ref) {
 
-    return value < ref;
+CheckItem equal(void* ref) {
+    
+    CheckItem eq = {
+        .verify = &_eq,
+        .ref = ref
+    };
+    return eq;
 }
 
 int greater_than(int value, int ref) {
 
-    return value == ref;
+CheckItem greater_than(void *ref) {
+        
+    CheckItem gt = {
+        .verify = &_gt,
+        .ref = ref
+    };
+    return gt;
 }

@@ -81,3 +81,15 @@ usar `va_end` no fluxo opcional da função.
 *Próximos desafios:*
 - Testar lógica semelhante do `CheckList` em `Form`
 - Desenvolver lógica para salvar o input validado em variável não-genérica
+
+---
+
+# 24/09/2026
+
+ Sabendo que a lógica do armazenamento da estrutura `Form` é semelhante a `ChekcList`, sua
+ implementação foi simples e fluida por já conhecer os erros e o caminho certo.
+
+ Todo o código de `.sandbox` que funciona como deveria foi colocado também nos arquivos definitivos
+ da biblioteca. Ordem de importações, estrutura de arquivos e detalhes do tipo serão resolvidos
+ no futuro. Nesse processo, as funções que realizam a validação e o handler que cria a estrutura
+ `CheckList` foram separadas em arquivos diferentes

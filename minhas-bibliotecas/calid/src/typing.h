@@ -7,14 +7,22 @@ typedef struct {
     void *ref; // TODO: Adicionar novo tipo para o tipo de variavel
 } CheckItem;
 
+
 typedef struct {
     CheckItem *list;
     int size;
 } CheckList;
 
+
 typedef struct {
     char *question;
-    char *msg_err;
-    void **destiny_ptr; // TODO: Adicionar novo tipo para o tipo de variavel
+    char *invalid_msg;
+    void **ipt_target; // TODO: Adicionar novo tipo para o tipo de variavel
     CheckList *checklist;
+} Field;
+
+
+typedef struct {
+    int size;
+    Field *field_list;
 } Form;
