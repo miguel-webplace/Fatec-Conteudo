@@ -10,7 +10,6 @@ CheckItem less_than(void* ref) {
     return ls;
 }
 
-int greater_than(int value, int ref) {
 
 CheckItem equal(void* ref) {
     
@@ -21,7 +20,6 @@ CheckItem equal(void* ref) {
     return eq;
 }
 
-int greater_than(int value, int ref) {
 
 CheckItem greater_than(void *ref) {
         
