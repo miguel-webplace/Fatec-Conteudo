@@ -102,3 +102,8 @@ Implementado e testado o código para direcionar o input validado a uma variáve
 
 Desenvolvimento da função de bootstrap, que inicia o formulário interativo. Foi criado o enum
 `DataType` para identificar o formatador para a função `scanf`.
+
+*Próximos passos:*
+- Continuar desenvolvimento em `apply`
+- Repensar sobre a concretização do tipo dentro das funções de validação
+ou se é possível implementar na execução do checklist
