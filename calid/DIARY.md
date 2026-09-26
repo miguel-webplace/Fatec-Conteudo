@@ -93,3 +93,12 @@ usar `va_end` no fluxo opcional da função.
  da biblioteca. Ordem de importações, estrutura de arquivos e detalhes do tipo serão resolvidos
  no futuro. Nesse processo, as funções que realizam a validação e o handler que cria a estrutura
  `CheckList` foram separadas em arquivos diferentes
+
+---
+
+# 25/09/2026
+
+Implementado e testado o código para direcionar o input validado a uma variável, já corretamente tipada.
+
+Desenvolvimento da função de bootstrap, que inicia o formulário interativo. Foi criado o enum
+`DataType` para identificar o formatador para a função `scanf`.

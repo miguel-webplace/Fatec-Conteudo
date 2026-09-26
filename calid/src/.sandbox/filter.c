@@ -1,7 +1,7 @@
 #include "check_alloc_pointer.c"
 
-#define DEBUG
-#define DEBUG_MAIN
+// #define DEBUG
+// #define DEBUG_MAIN
 
 int _lt(void* value, void* ref) {
     return *(int*)value <= *(int*)ref;

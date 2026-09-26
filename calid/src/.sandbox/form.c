@@ -1,10 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdarg.h>
-#include "../typing.h"
-
-#define DEBUG
-#define DEBUG_MAIN
+#include "filter.c"
+// #define DEBUG
+// #define DEBUG_MAIN
 
 
 

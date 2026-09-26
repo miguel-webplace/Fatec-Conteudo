@@ -1,4 +1,12 @@
 
+
+typedef enum {
+    INT,
+    FLOAT,
+    CHAR,
+    STR
+} DataType;
+
 typedef int ( Validator )( void*, void* ); // TODO: Adicionar novo tipo para o tipo de variavel
 
 
@@ -16,9 +24,10 @@ typedef struct {
 
 typedef struct {
     char *question;
-    char *invalid_msg;
-    void **ipt_target; // TODO: Adicionar novo tipo para o tipo de variavel
+    DataType data_type;
     CheckList *checklist;
+    char *invalid_msg;
+    void *ipt_target; // TODO: Adicionar novo tipo para o tipo de variavel
 } Field;
 
 

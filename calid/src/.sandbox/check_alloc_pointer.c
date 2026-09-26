@@ -9,7 +9,7 @@
 
 /*
    This sandbox simulates the use and flow of the checklist struct
- */
+*/
 
 
 int create_checklist(CheckList *checkptr, ...) {
