@@ -1,6 +1,5 @@
-#include "stdio.h"
-#include "../typing.h"
 #include <string.h>
+#include "filters.c"
 
 
 
@@ -9,28 +8,37 @@ void resolve_format(DataType data_type, char *fmt) {
     switch (data_type) {
         
         case INT:
-            strcpy(fmt, "%d");
-            break;
+            strcpy(fmt, "%d");  break;
             
         case FLOAT:
-            strcpy(fmt, "%f");
+            strcpy(fmt, "%f");  break;
             
         case CHAR:
-            strcpy(fmt, "%c");
+            strcpy(fmt, "%c");  break;
             
         case STR:
-            strcpy(fmt, "%s");
+            strcpy(fmt, "%s");  break;
     }
+    return;
 }
 
 
 int passtrough(void* ipt, CheckList *checklist) {
-    return 0; //
+    
+    for (int i_chk = 0; i_chk < checklist->size; ++i_chk) {
+        
+        CheckItem chk = checklist->list[i_chk];
+        int pass = chk.verify(ipt, chk.ref);
+        if (!pass) {
+            return 0;
+        }
+    }
+    return 1;
 }
 
 
 int apply(Form *form) {
-
+    
     Field *fields = form->field_list;
     for (int i_fld = 0; i_fld < form->size; ++i_fld) {
         
@@ -38,11 +46,10 @@ int apply(Form *form) {
         void *ipt;
         
         printf("%s\n---> ", field.question);
-
+        
         char fmt[3]; resolve_format(field.data_type, fmt);
-
         scanf(fmt, ipt);
-
+        
         int check_passed = passtrough(ipt, field.checklist);
         if (check_passed) {
             field.ipt_target = ipt;

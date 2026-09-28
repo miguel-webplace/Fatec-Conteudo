@@ -107,3 +107,22 @@ Desenvolvimento da função de bootstrap, que inicia o formulário interativo. F
 - Continuar desenvolvimento em `apply`
 - Repensar sobre a concretização do tipo dentro das funções de validação
 ou se é possível implementar na execução do checklist
+
+---
+# 28/09/2026
+
+Aplicado lógica para a função `passtrough`, que checa cada item do checklist contra o input passado.
+
+Para `apply`, o recebimento do input e seu tratamento foi validado:
+Para o input funcionar como um void pointer, foi necessário declarar
+ma variável `mem_alloc` para o ponteiro ter onde apontar.
+
+Se o input for inválido, a mensagem de erro é printada na tela e o input é pedido novamente. Com um input válido, `ipt_target_resolver`
+faz o type casting necessário.
+
+Por fim, `apply` libera os ponteiros de memória dinâmica e atribui eles como `NULL`.
+
+**Próximos desafios**
+
+- Encontrar outra solução para `mem_alloc`
+- Encontrar outra interface para descrever a estrutura `Field` para `add_field`

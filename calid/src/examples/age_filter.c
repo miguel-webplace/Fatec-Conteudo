@@ -1,32 +1,48 @@
-#include "../scan.c"
+#include "../calid.h"
 
 
 // Example of filling a age field
 
 int main() {
     
+    int min_children_age = 3, max_children_age = 17;
+    int min_adult_age = 18, max_adult_age = 69;
     
     // Variable and pointer to hold the data
-    int user_age, *ptr_user_age = &user_age;
+    int adult_age, *ptr_adult_age;
+    int children_age, *ptr_children_age;
     
-    Form *form = {.size = 1};
+    Form form = {.size = 2};
     
     // create checklist passing the number of items
-    CheckList age_filters = {.size = 2};
+    CheckList adult_filter = {.size = 2};
+    CheckList children_filter = {.size = 2};
     
     // add the filters to 'checklist'
-    create_checklist(&age_filters, greater_than(18), less_than(70));
+    create_checklist(&adult_filter, greater_than(&min_adult_age), less_than(&max_adult_age));
+    create_checklist(&children_filter, greater_than(&min_children_age), less_than(&max_children_age));
     
     // include fields on the same pointer, as a form
-    add_field(&form, {
-        .question = "Digite a sua idade: ";
-        .invalid_msg = "por favor, insira uma idade válida: ",
-        .ipt_target = &ptr_user_age,
-        .checklist = &age_filters
-    });
+    add_field(&form, (Field) {
+        .question = "Digite a sua idade [ ADULTO ]",
+        .invalid_msg = "Isso não é idade de adulto",
+        .ipt_target = &adult_age,
+        .data_type = INT,
+        .checklist = &adult_filter
+        },
+        (Field) {
+            .question = "Digite a sua idade [ CRIANÇA ]",
+            .invalid_msg = "Isso não é idade de criança",
+            .ipt_target = &children_age,
+            .data_type = INT,
+            .checklist = &children_filter
+        });
     
     // run the form
-    apply(form);
-
+    apply(&form);
+    
+    
+    printf("Idade do adulto: %d\n", adult_age);
+    printf("Idade da criança: %d\n", children_age);
     return 0;
 }
