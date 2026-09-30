@@ -100,7 +100,7 @@ int apply(Form *form) {
         ipt_target_resolver(field.ipt_target, ipt, field.data_type);
         
         
-        free(field.checklist); field.checklist = NULL;
+        free(field.checklist->list); field.checklist->list = NULL;
     }
     free(form->field_list); form->field_list = NULL;
     return 0;

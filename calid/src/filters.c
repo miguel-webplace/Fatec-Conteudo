@@ -29,3 +29,36 @@ CheckItem greater_than(void *ref) {
     };
     return gt;
 }
+
+
+CheckItem more_or_equal(void *ref) {
+    CheckItem gt_e = {
+        .verify = &_gt_e,
+        .ref = ref
+    };
+    return gt_e;
+}
+
+CheckItem notequal(void *ref) {
+    CheckItem not_e = {
+        .verify = &_not_e,
+        .ref = ref
+    };
+    return not_e;
+}
+
+CheckItem in_range(void *ref) {
+    CheckItem range = {
+        .verify = &_range,
+        .ref = ref
+    };
+    return range;
+}
+
+// CheckItem without(void *ref) {
+//     CheckItem without = {
+//         .verify = &_without,
+//         .ref = ref
+//     };
+//     return without;
+// }

@@ -126,3 +126,20 @@ Por fim, `apply` libera os ponteiros de memória dinâmica e atribui eles como `
 
 - Encontrar outra solução para `mem_alloc`
 - Encontrar outra interface para descrever a estrutura `Field` para `add_field`
+
+
+# 29/09/2026
+
+Tentei pensar em uma solução para a escrita dos campos no formulário, mas nã consegui.
+Em vez disso decidi escrever outro exemplo de uso para entender o que mudar e o que enxugar.
+
+Em `subscription`, perecbi que estava usando `free` em um pointeiro da stack, e corrigi.
+Para escrever o exemplo, precisei adicionar novas funções de validação e a estratégia de
+converter o tipo da referência dentro de `Validator` se tornou útil pela alta flexibilidade --
+porém na forma atual, não sei como implementar um filtro que depende do tamanho de uma lista, como
+por exemplo o input ser esta entre uma série de valores pré-definidos.
+
+**Próximos desafios**
+
+- Encontrar implementação para uma lista de referências
+- Desafios anteriores
